@@ -11,13 +11,13 @@ function applyTheme() {
     }
 }
 
-// Call the function to apply the theme on page load
+
 applyTheme();
 
 document.getElementById('mode-toggle').addEventListener('click', function(e) {
     document.body.classList.toggle('dark-mode');
     
-    // Save the theme preference in localStorage
+ 
     if (document.body.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark');
     } else {
@@ -29,13 +29,13 @@ document.getElementById('mode-toggle').addEventListener('click', function(e) {
     sunIcon.style.display = document.body.classList.contains('dark-mode') ? 'none' : 'inline';
     moonIcon.style.display = document.body.classList.contains('dark-mode') ? 'inline' : 'none';
     
-    // Add spin class for animation
+   
     this.classList.add('spin');
     
-    // Remove spin class after animation duration
+  
     setTimeout(() => {
         this.classList.remove('spin');
-    }, 500); // Match this duration with the CSS animation duration
+    }, 500); 
 
     const ripple = this.querySelector('.ripple');
     ripple.style.width = ripple.style.height = Math.max(window.innerWidth, window.innerHeight) + 'px';
@@ -71,7 +71,6 @@ fadeContainers.forEach((container, index) => {
 });
 
 // signer here
-
 function addNoCacheToFetch() {
     const originalFetch = window.fetch;
     window.fetch = function() {
@@ -422,7 +421,6 @@ function handleRegistrationError(error) {
                 const success = await registerUser(username, password);
                 if (success) {
                     showNotification("Account created successfully! You can now log in.", "success");
-                    // The UI is already updated in the registerUser function
                 }
             }
         });
@@ -440,7 +438,6 @@ function handleRegistrationError(error) {
 console.log(data);
 if (data.success) {
     showNotification('Registration successful. You can now log in.', 'success');
-    // Instead of calling toggleAuthMode, we'll update the UI directly
     isLoginMode = true;
     authTitle.textContent = "Login";
     authSubmit.textContent = "Login";
@@ -449,7 +446,7 @@ if (data.success) {
     agreePrivacyPolicyCheckbox.required = false;
     return true;
 } else {
-    console.error('Registration failed:', data); // Logs the full error details
+    console.error('Registration failed:', data); 
     showNotification(data.error || 'Registration failed. Please try again.', 'error');
     return false;
 }Ï
@@ -493,7 +490,6 @@ if (data.success) {
             if (devButton) devButton.classList.add("hidden");
             linkDurationInfo.textContent = '';
         }
-        // Dispatch a custom event when login status changes
         document.dispatchEvent(new Event('loginStatusChanged'));
         updateMaxFileSize();
     }
@@ -510,12 +506,12 @@ if (data.success) {
         
         if (!adminPanel.classList.contains('hidden')) {
             console.log('Admin panel should be visible now');
-            adminPanel.style.display = 'block'; // Force display
+            adminPanel.style.display = 'block'; 
             loadUsers();
             addCloseButtonToAdminPanel();
         } else {
             console.log('Admin panel should be hidden now');
-            adminPanel.style.display = 'none'; // Force hide
+            adminPanel.style.display = 'none'; 
         }
     }
 
@@ -558,7 +554,6 @@ if (data.success) {
         }
     }
 
-    // Call this function when the page loads
     document.addEventListener('DOMContentLoaded', checkAdminPanel);
 
     document.getElementById('devButton').addEventListener('click', () => {
