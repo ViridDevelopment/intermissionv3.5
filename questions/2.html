@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How do i use the content page? - CSL</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="back-button" id="backButton">
+            <i class="fas fa-arrow-left"></i> <!-- Back icon duhh -->
+        </div>
+        <div class="navbar-title">How do i use the content page?</div>
+        <div class="theme-toggle-container">
+            <button id="mode-toggle" class="button">
+                <i class="fas fa-sun" id="icon"></i>
+                <i class="fas fa-moon" id="icon" style="display: none;"></i>
+                <span class="ripple"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>How do i use the content page?</h2>
+            <p>the Content page contains the newest sideloading resources.</p>
+            <p>Tutorial made by @Milderous</p>
+        </div>
+        <div class="container">
+            <h3>IPA Library</h3>
+            <p>this neat ipa file contains link to github repos full of ipas and, you can even save your own to the app.</p>
+        </div>
+        <div class="container">
+            <h3>DNS</h3>
+            <p>Domain name system pretty much just prevents a revoke or a blacklist. (no garentees though!)</p>
+        </div>
+        <div class="container">
+            <h3>Certificates</h3>
+            <p>Certificates authenticate apps such as codex to apples servers so that the app can be used and installed, these are rather commonly revoked or blacklisted by apple themselves.</p>
+            
+        </div>
+        <div class="container">
+            <h3>So what now?</h3>
+            <p>Now that you understand each section of this page you should test them out and see if they benefit your sideloading experience.</p>
+        </div>
+    </main>
+    
+
+    <script src="/js/script.js"></script>
+    <script>
+       
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.history.back(); 
+        });
+    </script>
+</body>
+</html>

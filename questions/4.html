@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is MDM? - CSL</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="back-button" id="backButton">
+            <i class="fas fa-arrow-left"></i> <!-- Back icon duhh -->
+        </div>
+        <div class="navbar-title">What is MDM?</div>
+        <div class="theme-toggle-container">
+            <button id="mode-toggle" class="button">
+                <i class="fas fa-sun" id="icon"></i>
+                <i class="fas fa-moon" id="icon" style="display: none;"></i>
+                <span class="ripple"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>What is MDM?</h2>
+            <p>MDM or Mobile device management is like a remote control that organisations or schools may use to limit access on your device, such as games at certain times, we can however remove this restriction, heres how.</p>
+            <p>Tutorial made by @Milderous</p>
+        </div>
+        <div class="container">
+            <h3>Step 1</h3>
+            <p>have access to a physical computer, plug in the MDM "infested" device and sign into Itunes</p>
+        </div>
+        <div class="container">
+            <h3>Step 2</h3>
+            <p>download ibackupbot and backup ur device (ensure to note that this is the original copy of the device)</p>
+        </div>
+        <div class="container">
+            <h3>Step 3</h3>
+            <p>now delete the following:</p>
+            <a>mdmproperties.plist
+                payloaddependency.plist
+                profiletruth.plist
+                usersettings.plist
+                clienttruth.plist
+                cloudconfigurationdetails.plist
+                Mcmeta.plist
+                namedusersettings.plist</a>
+        </div>
+        <div class="container">
+            <h3>step 4</h3>
+            <p>save this as a new backup and restore it to the device, if you messed up use the other backup from earlier</p>
+        </div>
+    </main>
+    
+
+    <script src="/js/script.js"></script>
+    <script>
+       
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.history.back(); 
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherry Sideloading</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="blur-overlay"></div>
+    <header class="navbar">
+        <div class="hamburger-menu">
+            <div class="hamburger" id="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="dropdown" id="dropdown">
+                <a href="index.html">Home</a>
+                <a href="content.html">Content</a>
+                <a href="other.html">Other</a>
+                <a href="faq.html">FAQ</a>
+                <a href="signer.html">Signer</a>
+                <a href="modifications.html">Ipa Management</a>
+            </div>
+        </div>
+
+        <div class="navbar-title">Cherry Sideloading</div>
+
+        <div class="theme-toggle-container">
+            <button id="mode-toggle" class="button">
+                <i class="fas fa-sun" id="icon"></i>
+                <i class="fas fa-moon" id="icon" style="display: none;"></i>
+                <span class="ripple"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <input type="text" id="searchInput" placeholder="Add a keyword" onkeyup="filterFAQs()" class="search-bar">
+        </div>
+        <div class="container">
+            <div class="faq-container">
+                <div class="faq-item">
+                    <a href="questions/1.html">What is Sideloading?</a>
+                    <div class="divider"></div>
+                </div>
+                <div class="faq-item">
+                    <a href="questions/2.html">How do i use the content page?</a>
+                    <div class="divider"></div>
+                </div>
+                <div class="faq-item">
+                    <a href="questions/3.html">Is Sideloading Safe?</a>
+                    <div class="divider"></div>
+                </div>
+                <div class="faq-item">
+                    <a href="questions/4.html">What is MDM?</a>
+                    <div class="divider"></div>
+                </div>
+                <!-- Add more questions dumbass -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script>
+        function filterFAQs() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const txtValue = item.textContent || item.innerText;
+                item.style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+            });
+        }
+    </script>
+</body>
+</html> 

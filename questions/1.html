@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Sideloading? - CSL</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="back-button" id="backButton">
+            <i class="fas fa-arrow-left"></i> <!-- Back icon duhh -->
+        </div>
+        <div class="navbar-title">What is Sideloading?</div>
+        <div class="theme-toggle-container">
+            <button id="mode-toggle" class="button">
+                <i class="fas fa-sun" id="icon"></i>
+                <i class="fas fa-moon" id="icon" style="display: none;"></i>
+                <span class="ripple"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>What is Sideloading?</h2>
+            <p>well let's walk through it.</p>
+        </div>
+        <div class="container">
+            <h2>Literal Meaning</h2>
+            <p>Sideloading is the process of installing applications on a device from sources other than the official app store.</p>
+        </div>
+        <div class="container">
+            <h2> what does this mean for you?</h2>
+            <p>basically you get access to apps that Apple says you shouldn't have (let Tim cry)</p>
+        </div>
+        <div class="container">
+            <h2> yeah but is it safe?</h2>
+            <p>the only real danger of sideloading is downloading profiles or ipas, you can never be too careful with what you download online now can you?</p>
+        </div>
+    </main>
+
+    <script src="/js/script.js"></script>
+    <script>
+       
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.history.back(); 
+        });
+    </script>
+</body>
+</html>
