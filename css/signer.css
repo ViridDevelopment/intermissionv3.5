@@ -10,7 +10,7 @@ html, body {
 }
 
 :root {
-    --background-image-url: url('https://github.com/ViridDevelopment/intermissionv3.5/blob/main/img/marble.jpg?raw=true');
+    --background-image-url: url('/marble.jpg');
     --navbar-bg: rgba(0, 0, 0, 0.1); 
     --form-bg: rgba(255, 255, 255, 0.9);
     --login-bg: rgba(255, 255, 255, 0.9);
@@ -19,6 +19,9 @@ html, body {
     --text-color: #333;
     --button-bg: #007AFF;
     --button-hover: #0066CC;
+    --progress-bar-bg: #ffffff; /* White background for light mode */
+    --progress-bar-border: #cccccc; /* Grey border for light mode */
+    --progress-bar-bg-dark: #007AFF; /* Blue for dark mode */
 }
 
 body {
@@ -50,6 +53,7 @@ body.dark-mode::before {
 }
 
 .container {
+    width: 75%;
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
@@ -59,6 +63,9 @@ body.dark-mode::before {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.8);
+    aspect-ratio: 16 / 9;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 body.dark-mode .container {
@@ -89,6 +96,8 @@ body.dark-mode .container {
 body.dark-mode {
     background-color: #1c1c1e;
     color: #ffffff;
+    --progress-bar-bg: #555555; /* Grey background for dark mode */
+    --progress-bar-border: #ffffff; /* White border for dark mode */
 }
 
 body.dark-mode .container {
@@ -324,6 +333,7 @@ body.dark-mode .bar {
     font-size: 18px;
     margin: 0;
     padding: 0 20px;
+    margin-left: 70px;
 }
 
 body.dark-mode .navbar-title {
@@ -446,10 +456,14 @@ h1::after {
 }
 
 form {
-    background:rgba(192, 192, 192, 0.9);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 75%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    aspect-ratio: 16 / 9;
     transition: all 0.3s ease;
     border: 1px solid var(--border-color, #ccc);
 }
@@ -515,7 +529,9 @@ input[type="text"]:hover {
 }
 
 #result {
-    margin-top: 20px;
+    width: 75%;
+    max-width: 1200px;
+    margin: 20px auto;
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px) brightness(0.9);
@@ -535,7 +551,9 @@ input[type="text"]:hover {
 }
 
 .hidden {
-    display: none;
+    display: none; /* Keep this line to hide elements with this class */
+    /* visibility: visible; */ /* Remove this line */
+    /* opacity: 1; */ /* Remove this line */
 }
 
 .notification {
@@ -1412,4 +1430,46 @@ button,
         height: 30px;
         border-width: 3px;
     }
+}
+
+.admin-panel-button {
+    display: inline-block; /* Ensure it is displayed */
+    padding: 10px 20px;
+    background-color: var(--button-bg); /* Use your defined button background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-panel-button:hover {
+    background-color: var(--button-hover); /* Use your defined hover color */
+}
+
+#progressBarContainer {
+    width: 100%;
+    background-color: var(--progress-bar-bg); /* Use the variable for background */
+    border: 1px solid var(--progress-bar-border); /* Change border thickness to 1px */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+    position: relative;
+}
+
+#progressBar {
+    height: 20px;
+    width: 0;
+    background: var(--button-bg); /* Keep the progress bar color as defined */
+    transition: width 0.4s ease;
+    border-radius: 10px;
+}
+
+#progressText {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    font-weight: bold;
 }
