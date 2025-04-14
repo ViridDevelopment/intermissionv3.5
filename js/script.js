@@ -1,4 +1,3 @@
-// Function to apply the theme based on localStorage
 function applyTheme() {
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
@@ -11,13 +10,13 @@ function applyTheme() {
     }
 }
 
-// Call the function to apply the theme on page load
+
 applyTheme();
 
 document.getElementById('mode-toggle').addEventListener('click', function(e) {
     document.body.classList.toggle('dark-mode');
     
-    // Save the theme preference in localStorage
+ 
     if (document.body.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark');
     } else {
@@ -29,13 +28,13 @@ document.getElementById('mode-toggle').addEventListener('click', function(e) {
     sunIcon.style.display = document.body.classList.contains('dark-mode') ? 'none' : 'inline';
     moonIcon.style.display = document.body.classList.contains('dark-mode') ? 'inline' : 'none';
     
-    // Add spin class for animation
+   
     this.classList.add('spin');
     
-    // Remove spin class after animation duration
+  
     setTimeout(() => {
         this.classList.remove('spin');
-    }, 500); // Match this duration with the CSS animation duration
+    }, 500); 
 
     const ripple = this.querySelector('.ripple');
     ripple.style.width = ripple.style.height = Math.max(window.innerWidth, window.innerHeight) + 'px';
