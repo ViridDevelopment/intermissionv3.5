@@ -1,45 +1,3 @@
-/* 
- * CSS RULES AFFECTING SIGNER.HTML AND SIGNER.JS
- * =============================================
- * 
- * The following sections of CSS affect the signer.html and signer.js files:
- * 
- * 1. General Layout and Theme (lines ~1-100)
- *    - Body styles, theme variables, container styles
- *    - Dark mode styles
- * 
- * 2. Navbar and Header (lines ~100-200)
- *    - Navbar layout, title, and navigation elements
- *    - Sign-in button (.nav-icon, #signInButton)
- *    - Theme toggle button (#mode-toggle)
- * 
- * 3. Form Elements (lines ~300-400)
- *    - Form styling for the IPA signing form
- *    - File input containers and buttons
- *    - Password input fields
- * 
- * 4. File Input Styling (lines ~400-500)
- *    - File button styles (.file-button)
- *    - Filename display fields
- *    - File input containers
- * 
- * 5. User Info and Admin Panel (lines ~600-700)
- *    - User info display (#userInfo)
- *    - Admin panel styling (#adminPanel)
- *    - Dev button styling (.dev-button)
- * 
- * 6. Authentication Popup (lines ~700-800)
- *    - Popup container (#authPopup)
- *    - Popup content styling
- *    - Form elements within the popup
- *    - Close button styling
- * 
- * 7. Notifications and UI Feedback (lines ~800-900)
- *    - Notification styling
- *    - Loading indicators
- *    - Success/error messages
- */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -1376,13 +1334,11 @@ html {
     }
 }
 
-/* Ensure images and backgrounds scale properly */
 img {
     max-width: 100%;
     height: auto;
 }
 
-/* Improve form element scaling */
 input[type="text"],
 input[type="password"],
 input[type="file"],
@@ -1393,7 +1349,6 @@ textarea {
     box-sizing: border-box;
 }
 
-/* Improve button scaling */
 button,
 .button,
 .file-button {
@@ -1401,7 +1356,6 @@ button,
     min-width: fit-content;
 }
 
-/* Improve container scaling */
 .container {
     width: 100%;
     max-width: 1200px;
@@ -1410,7 +1364,6 @@ button,
     box-sizing: border-box;
 }
 
-/* Improve popup scaling */
 .popup-content {
     width: 90%;
     max-width: 500px;
@@ -1418,41 +1371,35 @@ button,
     box-sizing: border-box;
 }
 
-/* Improve admin panel scaling */
 .admin-panel {
     width: 100%;
     max-width: 400px;
     box-sizing: border-box;
 }
 
-/* Improve dropdown menu scaling */
 .dropdown {
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Improve file input scaling */
 .file-input-container {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
 }
 
-/* Improve user info scaling */
 .user-info {
     width: 100%;
     max-width: 300px;
     box-sizing: border-box;
 }
 
-/* Improve notification scaling */
 .notification {
     width: auto;
     max-width: 90%;
     box-sizing: border-box;
 }
 
-/* Improve loader scaling */
 .loader {
     width: 40px;
     height: 40px;
