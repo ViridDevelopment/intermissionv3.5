@@ -10,7 +10,7 @@ html, body {
 }
 
 :root {
-    --background-image-url: url('/marble.jpg');
+    --background-image-url: url('https://github.com/ViridDevelopment/intermissionv3.5/blob/main/img/marble.jpg?raw=true');
     --navbar-bg: rgba(0, 0, 0, 0.1); 
     --form-bg: rgba(255, 255, 255, 0.9);
     --login-bg: rgba(255, 255, 255, 0.9);
