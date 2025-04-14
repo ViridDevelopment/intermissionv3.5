@@ -58,6 +58,24 @@ body.dark-mode::before {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.8);
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: scale(1.05);
+}
+
+/* Scaling for devices */
+@media (max-width: 768px) { /* Tablet */
+    .container:hover {
+        transform: scale(1.03); /* Slightly smaller scale for tablets */
+    }
+}
+
+@media (max-width: 480px) { /* Mobile */
+    .container:hover {
+        transform: scale(1.01); /* Even smaller scale for mobile */
+    }
 }
 
 body.dark-mode .container {
@@ -74,11 +92,25 @@ body.dark-mode .container {
     color: inherit;
     font-size: 16px;
     cursor: pointer;
-    transition: none;
+    transition: transform 0.3s ease;
 }
 
 .button:hover {
+    transform: scale(1.05);
     opacity: 1;
+}
+
+/* Scaling for devices */
+@media (max-width: 768px) { /* Tablet */
+    .button:hover {
+        transform: scale(1.03); /* Slightly smaller scale for tablets */
+    }
+}
+
+@media (max-width: 480px) { /* Mobile */
+    .button:hover {
+        transform: scale(1.01); /* Even smaller scale for mobile */
+    }
 }
 
 .ripple {
@@ -92,9 +124,9 @@ body.dark-mode {
 
 .fade-container {
     opacity: 0;
-    transition: opacity 1s ease-in;
+    transition: opacity 1s ease-in, transform 0.3s ease;
     margin: 20px auto;
-    width: 300px;
+    width: 300px; /* Default width for mobile */
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 20px;
@@ -108,6 +140,25 @@ body.dark-mode {
 
 .fade-in {
     opacity: 1;
+    transform: scale(1);
+}
+
+/* Scaling for devices */
+@media (min-width: 481px) and (max-width: 768px) { /* Tablet */
+    .fade-container {
+        width: 400px; /* Wider for tablets */
+    }
+}
+
+@media (min-width: 769px) { /* Desktop */
+    .fade-container {
+        width: 600px; /* Widest for desktops */
+    }
+}
+
+body.dark-mode .fade-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
 }
 
 .hamburger-menu {
