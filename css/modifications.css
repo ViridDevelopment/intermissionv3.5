@@ -360,44 +360,44 @@ body.dark-mode h3 {
 
 .custom-form {
     padding: 20px;
-    background-color: #f9f9f9; /* Light background for the form */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    margin-top: 20px; /* Add gap between navbar and form */
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px; 
 }
 
 body.dark-mode .custom-form {
-    background-color: #333; /* Dark background for the form in dark mode */
-    color: white; /* Change text color to white for better contrast */
+    background-color: #333;
+    color: white; 
 }
 
 body.dark-mode .custom-form .styled-input,
 body.dark-mode .custom-form .styled-select {
-    background-color: #444; /* Darker background for inputs in dark mode */
-    color: white; /* Change text color to white for better contrast */
-    border: 1px solid #666; /* Darker border for inputs in dark mode */
+    background-color: #444; 
+    color: white; 
+    border: 1px solid #666; 
 }
 
 body.dark-mode .custom-form label {
-    color: white; /* Change label color to white in dark mode */
+    color: white; 
 }
 
 .custom-form .card {
-    margin-bottom: 15px; /* Space between form elements */
+    margin-bottom: 15px; 
 }
 
 .custom-form label {
-    font-weight: bold; /* Bold labels */
-    margin-bottom: 5px; /* Space below labels */
-    display: block; /* Labels on their own line */
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block; 
 }
 
 .custom-form .styled-input,
 .custom-form .styled-select {
-    width: 100%; /* Full width inputs */
-    padding: 10px; /* Padding inside inputs */
-    border: 1px solid #ccc; /* Border for inputs */
-    border-radius: 4px; /* Rounded corners for inputs */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
 }
 
 .custom-form .custom-file-input {
@@ -425,94 +425,94 @@ body.dark-mode .custom-form label {
 }
 
 .file-input-container {
-    display: flex; /* Flexbox for layout */
-    align-items: center; /* Center items vertically */
-    width: 100%; /* Full width */
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .filename-display {
-    flex: 1; /* Take up remaining space */
-    padding: 10px; /* Padding for the text box */
-    border: 1px solid var(--border-color); /* Border color */
-    border-radius: 20px; /* Rounded corners */
-    background-color: var(--input-bg); /* Background color */
-    color: var(--text-color); /* Text color */
-    margin-right: 10px; /* Space between text box and button */
-    cursor: default; /* Default cursor */
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    margin-right: 10px; 
+    cursor: default; 
 }
 
 .custom-file-input {
-    position: relative; /* Positioning for file input */
-    overflow: hidden; /* Hide overflow */
+    position: relative; 
+    overflow: hidden;
 }
 
 .custom-file-input input[type="file"] {
-    font-size: 20px; /* Font size for the file input */
-    position: absolute; /* Positioning to cover the label */
-    left: 0; /* Align to the left */
-    top: 0; /* Align to the top */
-    opacity: 0; /* Hide the default file input */
-    cursor: pointer; /* Pointer cursor for button */
-    height: 100%; /* Full height */
-    width: 100%; /* Full width */
+    font-size: 20px; 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    opacity: 0; 
+    cursor: pointer; 
+    height: 100%; 
+    width: 100%; 
 }
 
 .custom-file-input label {
-    background-color: #007bff; /* Button color */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Padding for label */
-    border-radius: 20px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor for button */
-    display: inline-block; /* Display as inline-block */
-    transition: background-color 0.3s; /* Transition for hover effect */
+    background-color: #007bff; 
+    color: white; 
+    padding: 10px 20px; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    display: inline-block; 
+    transition: background-color 0.3s; 
 }
 
 .custom-file-input label:hover {
-    background-color: #0056b3; /* Darker button color on hover */
-    filter: brightness(0.9); /* Slightly darker tint on hover */
+    background-color: #0056b3;
+    filter: brightness(0.9); 
 }
 
 .custom-title {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow effect */
-    margin-bottom: 20px; /* Optional: Add some space below the title */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px; 
 }
 
 .styled-button {
-    background-color: #007bff; /* Button color */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Padding for button */
-    border: none; /* No border */
-    border-radius: 20px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor */
-    transition: background-color 0.3s; /* Transition for hover effect */
-    width: 100%; /* Set width to 100% */
+    background-color: #007bff; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 20px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    width: 100%; 
 }
 
 .styled-button:hover {
-    background-color: #0056b3; /* Darker button color on hover */
+    background-color: #0056b3;
 }
 
 #resultDiv {
-    background-color: #f1f1f1; /* Light background for the result section */
-    border: 1px solid #ccc; /* Border around the result section */
-    border-radius: 8px; /* Rounded corners */
-    padding: 20px; /* Padding inside the result section */
-    margin-top: 20px; /* Space above the result section */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #f1f1f1; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    padding: 20px; 
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 #resultDiv h3 {
-    margin-bottom: 10px; /* Space below the heading */
-    font-size: 1.5em; /* Larger font size for the heading */
-    color: #333; /* Darker color for the heading */
+    margin-bottom: 10px; 
+    font-size: 1.5em;
+    color: #333; 
 }
 
 #resultContent {
-    white-space: pre-wrap; /* Preserve whitespace and line breaks */
-    background-color: #fff; /* White background for the content */
-    border: 1px solid #ddd; /* Border around the content */
-    border-radius: 4px; /* Rounded corners for the content */
-    padding: 10px; /* Padding inside the content */
-    overflow: auto; /* Allow scrolling if content is too long */
-    max-height: 300px; /* Limit the height of the content */
+    white-space: pre-wrap; 
+    background-color: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    padding: 10px; 
+    overflow: auto; 
+    max-height: 300px; 
 }
