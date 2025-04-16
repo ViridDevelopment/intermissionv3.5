@@ -104,10 +104,17 @@ addNoCacheToFetch();
 
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("ASrequest");
+    const cyanNameInput = document.getElementById("cyan_name");
+    const cyanVersionInput = document.getElementById("cyan_version");
+    const cyanBundleIdInput = document.getElementById("cyan_bundle_id");
+    const cyanOverwriteCheckbox = document.getElementById("overwriteCheckbox");
+    const cyanIconInput = document.getElementById("cyan_icon");
+    const cyanCompressLevelSelect = document.getElementById("cyan_compress_level");
     const resultDiv = document.getElementById("result");
     const loader = document.getElementById("loader");
     const togglePassword = document.getElementById("togglePassword");
     const passwordInput = document.getElementById("password");
+    const themeToggle = document.getElementById("themeToggle");
     const signInButton = document.getElementById("signInButton");
     const authPopup = document.getElementById("authPopup");
     const authForm = document.getElementById("authForm");
@@ -118,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const usernameDisplay = document.getElementById("username-display");
     const privacyPolicyAgreement = document.getElementById("privacyPolicyAgreement");
     const agreePrivacyPolicyCheckbox = document.getElementById("agreePrivacyPolicy");
+    const viewPrivacyPolicyLink = document.getElementById("viewPrivacyPolicy");
     const maxFileSizeElement = document.getElementById('maxFileSize');
     const linkDurationInfo = document.getElementById('linkDuration');
 
@@ -167,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function setTheme(theme) {
         document.body.className = theme;
         localStorage.setItem("theme", theme);
+        themeToggle.className = `fas ${themeIcons[theme]}`;
         currentTheme = theme;
 
         const existingSnow = document.querySelector('.snow');
@@ -183,6 +192,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    themeToggle.addEventListener("click", function () {
+        const nextThemeIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
+        setTheme(themes[nextThemeIndex]);
+        rotation += 359;
+        if (rotation >= 360) {
+            rotation = 0;
+        }
+        this.style.transform = `rotate(${rotation}deg)`;
+    });
+
     const savedTheme = localStorage.getItem("theme") || "normal-mode";
     setTheme(savedTheme);
 
@@ -194,93 +213,101 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (form) {
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault();
-        if (!currentUser) {
-            showNotification("Please log in to sign IPAs", "error");
-            return;
-        }
-
-        // Logging user and file info
-        console.log("Signing request initiated by user:", currentUser.username);
-        const ipaFile = document.getElementById('ipa').files[0];
-        console.log("File selected for signing:", ipaFile ? ipaFile.name : "No file selected");
-
-        const maxSize = currentUser.premium ? 1.5 * 1024 * 1024 * 1024 : 1024 * 1024 * 1024;
-
-        if (ipaFile && ipaFile.size > maxSize) {
-            showNotification(`File size exceeds the ${currentUser.premium ? '1.5 GB' : '1 GB'} limit. ${currentUser.premium ? '' : 'Upgrade to premium for larger files.'}`, "error");
-            return;
-        }
-
-        resultDiv.textContent = "";
-        loader.classList.remove("hidden");
-
-        const formData = new FormData(form);
-        formData.append("isPremium", currentUser.premium ? 'true' : 'false');
-        formData.append("expiryDays", currentUser.premium ? "120" : "30");
-        formData.append("username", currentUser.username);
-
-        const button = form.querySelector('button[type="submit"]');
-if (button) {
-    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-    button.disabled = true;
-} else {
-    console.warn("Submit button not found in the form.");
-}
-
-        try {
-            console.log("Sending signing request to API...");
-            console.log("User premium status:", currentUser.premium);
-            
-            const response = await fetch("https://api.aurorasigner.xyz/sign", {
-                method: "POST",
-                body: formData
-            });
-
-            console.log("Response received from API with status:", response.status);
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            if (!currentUser) {
+                showNotification("Please log in to sign IPAs", "error");
+                return;
             }
 
-            const result = await response.json();
-            console.log("Signing successful. API response:", result);
-            handleSigningSuccess(result);
-        } catch (error) {
-            console.error("Error during signing request:", error);
-            handleSigningError(error);
-        } finally {
-            button.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign IPA';
-            button.disabled = false;
-        }
-    });
-}
+            // Logging user and file info
+            console.log("Signing request initiated by user:", currentUser.username);
+            const ipaFile = document.getElementById('ipa').files[0];
+            console.log("File selected for signing:", ipaFile ? ipaFile.name : "No file selected");
 
-function handleSigningSuccess(data) {
-    loader.classList.add("hidden");
-    console.log("Handling signing success. Data:", data);
-    
-    if (data.install_url) {
-        const installLink = document.createElement("a");
-        
-        if (data.install_url.includes('loot-link.com')) {
-            console.log("Processing LootLabs URL:", data.install_url);
-            installLink.href = data.install_url;
-        } else {
-            console.log("Processing direct install URL:", data.install_url);
-            installLink.href = data.install_url;
-        }
-        
-        installLink.textContent = "Install App";
-        installLink.className = "install-link";
-        resultDiv.appendChild(installLink);
-        showNotification("IPA signed successfully!", "success");
-    } else {
-        console.error("Failed to obtain install link from response data.");
-        throw new Error("Unable to get the install link");
+            const maxSize = currentUser.premium ? 1.5 * 1024 * 1024 * 1024 : 1024 * 1024 * 1024;
+
+            if (ipaFile && ipaFile.size > maxSize) {
+                showNotification(`File size exceeds the ${currentUser.premium ? '1.5 GB' : '1 GB'} limit. ${currentUser.premium ? '' : 'Upgrade to premium for larger files.'}`, "error");
+                return;
+            }
+
+            resultDiv.textContent = "";
+            loader.classList.remove("hidden");
+
+            const formData = new FormData(form);
+            formData.append("isPremium", currentUser.premium ? 'true' : 'false');
+            formData.append("expiryDays", currentUser.premium ? "120" : "30");
+            formData.append("username", currentUser.username);
+            formData.append("cyan_name", cyanNameInput.value);
+            formData.append("cyan_version", cyanVersionInput.value);
+            formData.append("cyan_bundle_id", cyanBundleIdInput.value);
+            formData.append("cyan_overwrite", cyanOverwriteCheckbox.checked);
+            if (cyanIconInput.files.length > 0) {
+                formData.append("cyan_icon", cyanIconInput.files[0]);
+            }
+            formData.append("cyan_compress_level", cyanCompressLevelSelect.value);
+
+            const button = form.querySelector('button[type="submit"]');
+            if (button) {
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                button.disabled = true;
+            } else {
+                console.warn("Submit button not found in the form.");
+            }
+
+            try {
+                console.log("Sending signing request to API...");
+                console.log("User premium status:", currentUser.premium);
+                
+                const response = await fetch("https://api.aurorasigner.xyz/sign", {
+                    method: "POST",
+                    body: formData
+                });
+
+                console.log("Response received from API with status:", response.status);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log("Signing successful. API response:", result);
+                handleSigningSuccess(result);
+            } catch (error) {
+                console.error("Error during signing request:", error);
+                handleSigningError(error);
+            } finally {
+                button.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign IPA';
+                button.disabled = false;
+            }
+        });
     }
-}
+
+    function handleSigningSuccess(data) {
+        loader.classList.add("hidden");
+        console.log("Handling signing success. Data:", data);
+        
+        if (data.install_url) {
+            const installLink = document.createElement("a");
+            
+            if (data.install_url.includes('loot-link.com')) {
+                console.log("Processing LootLabs URL:", data.install_url);
+                installLink.href = data.install_url;
+            } else {
+                console.log("Processing direct install URL:", data.install_url);
+                installLink.href = data.install_url;
+            }
+            
+            installLink.textContent = "Install App";
+            installLink.className = "install-link";
+            resultDiv.appendChild(installLink);
+            showNotification("IPA signed successfully!", "success");
+        } else {
+            console.error("Failed to obtain install link from response data.");
+            throw new Error("Unable to get the install link");
+        }
+    }
 
     async function handleSigningError(error) {
         console.error("Signing process failed:", error);
@@ -306,28 +333,28 @@ function handleSigningSuccess(data) {
         }
     }
 
-function handleRegistrationError(error) {
-    console.error("Registration process failed:", error);
+    function handleRegistrationError(error) {
+        console.error("Registration process failed:", error);
 
-    loader.classList.add("hidden");
+        loader.classList.add("hidden");
 
-    // If error.response exists and it's a validation error (status 400)
-    if (error.response && error.response.status === 400) {
-        error.response.json().then((data) => {
-            const errorMessage = data.error || "An error occurred. Please try again.";
-            resultDiv.textContent = `Error: ${errorMessage}`;
-            showNotification(errorMessage, "error");
-        }).catch(() => {
-            // In case parsing the error message fails
-            resultDiv.textContent = "Error: Failed to register. Please contact support.";
-            showNotification("Failed to register. Please contact support.", "error");
-        });
-    } else {
-        // For any other kind of error (e.g., network error or unexpected server error)
-        resultDiv.textContent = "Error: Internal server error. Please try again later.";
-        showNotification("Internal server error", "error");
+        // If error.response exists and it's a validation error (status 400)
+        if (error.response && error.response.status === 400) {
+            error.response.json().then((data) => {
+                const errorMessage = data.error || "An error occurred. Please try again.";
+                resultDiv.textContent = `Error: ${errorMessage}`;
+                showNotification(errorMessage, "error");
+            }).catch(() => {
+                // In case parsing the error message fails
+                resultDiv.textContent = "Error: Failed to register. Please contact support.";
+                showNotification("Failed to register. Please contact support.", "error");
+            });
+        } else {
+            // For any other kind of error (e.g., network error or unexpected server error)
+            resultDiv.textContent = "Error: Internal server error. Please try again later.";
+            showNotification("Internal server error", "error");
+        }
     }
-}
 
     function showNotification(message, type) {
         const notification = document.createElement("div");
@@ -341,22 +368,30 @@ function handleRegistrationError(error) {
     }
 
     const fileInputs = document.querySelectorAll('input[type="file"]');
-    fileInputs.forEach((input) => {
-        input.addEventListener("change", (event) => {
-            const fileName = event.target.files[0]?.name || "No file chosen";
-            const displayElement = input.parentElement.querySelector('.filename-display');
-            if (displayElement) {
-                displayElement.value = fileName;
-            }
+    if (fileInputs.length > 0) {
+        fileInputs.forEach((input) => {
+            input.addEventListener("change", function (event) {
+                const file = event.target.files[0];
+                if (file && !isValidFileType(file, input.id)) {
+                    showNotification(
+                        `Invalid file type for ${input.id}. Please select the correct file.`,
+                        "error"
+                    );
+                    input.value = "";
+                }
+            });
         });
-    });
+    }
 
-    const fileButtons = document.querySelectorAll(".file-button");
-    fileButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-            button.previousElementSibling.click();
-        });
-    });
+    function isValidFileType(file, inputId) {
+        const validTypes = {
+            p12: [".p12"],
+            mobileprovision: [".mobileprovision"],
+            ipa: [".ipa"],
+        };
+        const fileExtension = file.name.split(".").pop().toLowerCase();
+        return validTypes[inputId].includes(`.${fileExtension}`);
+    }
 
     if (signInButton) {
         signInButton.addEventListener("click", (e) => {
@@ -421,12 +456,13 @@ function handleRegistrationError(error) {
                 const success = await registerUser(username, password);
                 if (success) {
                     showNotification("Account created successfully! You can now log in.", "success");
+                    // The UI is already updated in the registerUser function
                 }
             }
         });
     }
 
-        async function registerUser(username, password) {
+    async function registerUser(username, password) {
         try {
             console.log('Attempting register with:', username, password);
             const response = await fetch('https://admin.aurorasigner.xyz/api.js', {
@@ -435,21 +471,22 @@ function handleRegistrationError(error) {
                 body: JSON.stringify({ action: 'register', username, password }),
             });
             const data = await response.json();
-console.log(data);
-if (data.success) {
-    showNotification('Registration successful. You can now log in.', 'success');
-    isLoginMode = true;
-    authTitle.textContent = "Login";
-    authSubmit.textContent = "Login";
-    authToggle.innerHTML = 'Don\'t have an account? <a href="#">Sign Up</a>';
-    privacyPolicyAgreement.style.display = "none";
-    agreePrivacyPolicyCheckbox.required = false;
-    return true;
-} else {
-    console.error('Registration failed:', data); 
-    showNotification(data.error || 'Registration failed. Please try again.', 'error');
-    return false;
-}Ï
+            console.log(data);
+            if (data.success) {
+                showNotification('Registration successful. You can now log in.', 'success');
+                // Instead of calling toggleAuthMode, we'll update the UI directly
+                isLoginMode = true;
+                authTitle.textContent = "Login";
+                authSubmit.textContent = "Login";
+                authToggle.innerHTML = 'Don\'t have an account? <a href="#">Sign Up</a>';
+                privacyPolicyAgreement.style.display = "none";
+                agreePrivacyPolicyCheckbox.required = false;
+                return true;
+            } else {
+                console.error('Registration failed:', data); // Logs the full error details
+                showNotification(data.error || 'Registration failed. Please try again.', 'error');
+                return false;
+            }
         } catch (error) {
             console.error('Registration error:', error);
             showNotification('An error occurred during registration. Please try again.', 'error');
@@ -490,43 +527,9 @@ if (data.success) {
             if (devButton) devButton.classList.add("hidden");
             linkDurationInfo.textContent = '';
         }
+        // Dispatch a custom event when login status changes
         document.dispatchEvent(new Event('loginStatusChanged'));
         updateMaxFileSize();
-    }
-
-    function toggleAdminPanel() {
-        const adminPanel = document.getElementById('adminPanel');
-        if (!adminPanel) {
-            console.error('Admin panel element not found');
-            return;
-        }
-        console.log('Admin panel before toggle:', adminPanel.classList.contains('hidden'));
-        adminPanel.classList.toggle('hidden');
-        console.log('Admin panel after toggle:', adminPanel.classList.contains('hidden'));
-        
-        if (!adminPanel.classList.contains('hidden')) {
-            console.log('Admin panel should be visible now');
-            adminPanel.style.display = 'block'; 
-            loadUsers();
-            addCloseButtonToAdminPanel();
-        } else {
-            console.log('Admin panel should be hidden now');
-            adminPanel.style.display = 'none'; 
-        }
-    }
-
-    function addCloseButtonToAdminPanel() {
-        const adminPanel = document.getElementById('adminPanel');
-        if (!adminPanel) return;
-
-        let closeButton = adminPanel.querySelector('.close-button');
-        if (!closeButton) {
-            closeButton = document.createElement('button');
-            closeButton.className = 'close-button';
-            closeButton.innerHTML = '&times;';
-            closeButton.onclick = toggleAdminPanel;
-            adminPanel.insertBefore(closeButton, adminPanel.firstChild);
-        }
     }
 
     function checkAdminPanel() {
@@ -554,6 +557,7 @@ if (data.success) {
         }
     }
 
+    // Call this function when the page loads
     document.addEventListener('DOMContentLoaded', checkAdminPanel);
 
     document.getElementById('devButton').addEventListener('click', () => {
@@ -569,6 +573,21 @@ if (data.success) {
     document.querySelectorAll(".close").forEach((closeButton) => {
         closeButton.addEventListener("click", () => {
             closeButton.closest(".popup").style.display = "none";
+        });
+    });
+
+    const fileButtons = document.querySelectorAll(".file-button");
+    fileButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            button.previousElementSibling.click();
+        });
+    });
+
+    fileInputs.forEach((input) => {
+        input.addEventListener("change", (event) => {
+            const fileName = event.target.files[0].name;
+            const button = input.nextElementSibling;
+            button.textContent = fileName;
         });
     });
 
@@ -607,9 +626,9 @@ if (data.success) {
             
             if (user.premium) {
                 usernameDisplay.innerHTML += ' <span class="premium-badge">Premium</span>';
-                linkDurationInfo.textContent = 'Links last for 2 months because you have premium';
+                linkDurationInfo.textContent = 'Links last for 4 months because you have premium';
             } else {
-                linkDurationInfo.textContent = 'Links last for 14 days';
+                linkDurationInfo.textContent = 'Links last for 1 month';
             }
             
             if (user.isDev) {
@@ -683,6 +702,11 @@ if (data.success) {
         }
     }
 
+    /*viewPrivacyPolicyLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        showPrivacyPolicy();
+    });*/
+
     document.getElementById('backToSignup').addEventListener('click', hidePrivacyPolicy);
 
     function updateMaxFileSize() {
@@ -695,4 +719,9 @@ if (data.success) {
 
     // Call this function when the page loads
     updateMaxFileSize();
+
+    document.getElementById('ASrequest').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Handle form submission and send data to the backend
+    });
 });
